@@ -95,8 +95,19 @@ def single_line_feature_creation():
     choose_amount_of_movement = Label(values, text="Choose Amount of Movement", font=subtitle_font)
     # choose the value spinbox
     line_value = Spinbox(values, from_=-360, to=360, font=spinbox_font, textvariable=move_type_value)
-    # dedicate values button
+    # dedicate values
+
+    # function for button
+    def dedicate_the_movement():
+        move_type_list.append(assign_type(move_type.get()))
+        line_input.destroy()
+        find_where_to_append()
+        
+        print(move_type_list, distance_of_moves_list, angle_of_turns_list, circle_radii_list)
+
+    #button to dedicate
     dedicate_values = Button(values, text="create movement", command=dedicate_the_movement)
+        
     # value spinbox implemented
     values.grid(row=6, column=1)
     choose_amount_of_movement.grid(row=1, column=1)
@@ -104,15 +115,8 @@ def single_line_feature_creation():
     # actual spinbox implementations now
     line_value.grid(row=2, column=1)
     line_input.mainloop()
-
-
-def dedicate_the_movement():
-    move_type_list.append(assign_type(move_type.get()))
-    find_where_to_append()
-    
-    print(move_type_list, distance_of_moves_list, angle_of_turns_list, circle_radii_list)
-
-
+       
+       
 def find_where_to_append():
     if move_type.get() == 1:
         distance_of_moves_list.append(move_type_value.get())
