@@ -38,22 +38,17 @@ def drawing(type_of_action=[], colours=[], cursor_widths=[],  circle_radii=[], d
 
 
 def front_end():
-    # variables to be inputted
-    num_of_inputted_moves = 0
     # setting up tkinter
     screen = Tk()
     title("draw a pic m8")
     # creating the widgets
     # fonts
     the_header = Label(screen, text="Alistairs Tkinter-turtle integration", font=header_font)
-    # number of moves variable spinbox
-    num_of_moves = Spinbox(screen, from_=0, to=300, font=spinbox_font, textvariable=num_of_inputted_moves)
     # start making your lines button
     create_individual_lines = Button(screen, text="create lines individually", command=single_line_feature_creation)
     # create a pattern instead button
     create_pattern = Button(screen, text="create lines using pattern", command=create_your_pattern)
     # placing on the screen
-    num_of_moves.grid(row=2, column=1, columnspan=2)
     create_individual_lines.grid(row=3, column=1, sticky=E)
     create_pattern.grid(row=3, column=2, sticky=W)
     the_header.grid(row=1, column=1, columnspan=2)
