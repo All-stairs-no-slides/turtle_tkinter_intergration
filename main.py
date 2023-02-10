@@ -68,6 +68,7 @@ def single_line_feature_creation():
     move_type = IntVar()
     move_type_value = IntVar()
     line_input = Toplevel()
+
     # general title
     new_window_title = Label(line_input, text="Modify your movements", font=("Times", 32))
     # choosing the type of movement
@@ -84,12 +85,16 @@ def single_line_feature_creation():
     line_type.grid(row=2, column=1)
     rotation_type.grid(row=3, column=1)
     circle_type.grid(row=4, column=1)
+
     # frame for the values that shall be assigned
     values = Frame(line_input)
     # subtitle
     choose_amount_of_movement = Label(values, text="Choose Amount of Movement", font=subtitle_font)
     # choose the value spinbox
     line_value = Spinbox(values, from_=-360, to=360, font=spinbox_font, textvariable=move_type_value)
+    #sutitle
+    choose_width = Label(values, text = "choose line width", font= subtitle_font)
+
     # dedicate values
 
     # function for button
@@ -97,7 +102,7 @@ def single_line_feature_creation():
         move_type_list.append(assign_type(move_type.get()))
         line_input.destroy()
         find_where_to_append()
-        
+        drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
         print(move_type_list, distance_of_moves_list, angle_of_turns_list, circle_radii_list)
 
     #button to dedicate
@@ -106,9 +111,10 @@ def single_line_feature_creation():
     # value spinbox implemented
     values.grid(row=6, column=1)
     choose_amount_of_movement.grid(row=1, column=1)
-    dedicate_values.grid(row=3, column=1)
+    dedicate_values.grid(row=5, column=1)
     # actual spinbox implementations now
     line_value.grid(row=2, column=1)
+    choose_width.grid(row=3, column=1)
     line_input.mainloop()
        
        
@@ -135,7 +141,6 @@ def assign_type(type):
 
 def main():
     front_end()
-    drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
 
 
 if __name__ == '__main__':
