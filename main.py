@@ -21,7 +21,7 @@ def drawing(type_of_action=[], colours=[], cursor_widths=[],  circle_radii=[], d
     for each_move in range(len(type_of_action)):
         print(each_move)
         # changing general/unspecified things
-        pensize(6)
+        pensize(cursor_widths[each_move])
         color("black")
         # checking for each type of line and drawing it
         if type_of_action[each_move] == "line":
@@ -68,10 +68,11 @@ def create_your_pattern():
 def single_line_feature_creation():
     # create the features of each line
     print("customise your lines")
-    global move_type, move_type_value
+    global move_type, move_type_value, move_type_width
     # general variables
     move_type = IntVar()
     move_type_value = IntVar()
+    move_type_width = IntVar()
     line_input = Toplevel()
 
     # general title
@@ -93,12 +94,14 @@ def single_line_feature_creation():
 
     # frame for the values that shall be assigned
     values = Frame(line_input)
-    # subtitle
+    # amount subtitle
     choose_amount_of_movement = Label(values, text="Choose Amount of Movement", font=subtitle_font)
     # choose the value spinbox
-    line_value = Spinbox(values, from_=-360, to=360, font=spinbox_font, textvariable=move_type_value)
-    #sutitle
+    line_value = Spinbox(values, font=spinbox_font, from_=-10000, to=10000, textvariable=move_type_value)
+    # width sutitle
     choose_width = Label(values, text = "choose line width", font= subtitle_font)
+    # width spinbox
+    width_value = Spinbox(values, from_=0, to=10000, font=spinbox_font, textvariable=move_type_width)
 
     # dedicate values
 
@@ -113,17 +116,23 @@ def single_line_feature_creation():
     #button to dedicate
     dedicate_values = Button(values, text="create movement", command=dedicate_the_movement)
         
-    # value spinbox implemented
+    # frame implemented
     values.grid(row=6, column=1)
+    # value spinbox implemented
     choose_amount_of_movement.grid(row=1, column=1)
+    # final dedication button implemented
     dedicate_values.grid(row=5, column=1)
     # actual spinbox implementations now
     line_value.grid(row=2, column=1)
+    # width label implementation
     choose_width.grid(row=3, column=1)
+    # width spinbox implementation
+    width_value.grid(row=4, column=1)
     line_input.mainloop()
        
        
 def find_where_to_append():
+    cursor_widths_list.append(move_type_width.get())
     if move_type.get() == 1:
         distance_of_moves_list.append(move_type_value.get())
         return
