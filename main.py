@@ -47,20 +47,16 @@ def front_end():
     # start making your lines button
     create_individual_lines = Button(screen, text="create lines individually", command=single_line_feature_creation)
     # create a pattern instead button
-    create_pattern = Button(screen, text="create lines using pattern", command=create_your_pattern)
+    create_pattern = Button(screen, text="draw lines repeatedly", command=create_your_pattern)
     # final draw initiation
     create_drawing = Button(screen, text="Draw", command=draw)
     # placing on the screen
-    create_individual_lines.grid(row=3, column=1, sticky=E)
-    create_pattern.grid(row=3, column=2, sticky=W)
-    create_drawing.grid(row=4, column=1, columnspan=2)
+    create_individual_lines.grid(row=3, column=1, columnspan=2)
+    create_pattern.grid(row=4, column=2, sticky=W)
+    create_drawing.grid(row=4, column=1, sticky=E)
     the_header.grid(row=1, column=1, columnspan=2)
     # exiting gracefully
     screen.mainloop()
-
-def draw():
-    drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
-    move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list = []
 
 def create_your_pattern():
     print("create your pattern")
@@ -155,6 +151,10 @@ def single_line_feature_creation():
     blue_scale.grid(row=11, column=1)
 
     line_input.mainloop()
+
+def draw():
+    drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
+    move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list = []
        
        
 def find_where_to_append():
