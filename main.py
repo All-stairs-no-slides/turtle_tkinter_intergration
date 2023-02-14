@@ -19,8 +19,8 @@ def drawing(type_of_action=[], colours=[], cursor_widths=[],  circle_radii=[], d
     turn_num = 0
     pendown()
     for each_move in range(len(type_of_action)):
-        print(each_move)
-        # changing general/unspecified things colours_list[each_move][0], colours_list[each_move][1], colours_list[each_move][2]
+        # print(each_move)
+        # changing general/unspecified things
         pensize(cursor_widths[each_move])
         pencolor(colours[each_move][0], colours[each_move][1], colours[each_move][2])
         # checking for each type of line and drawing it
@@ -33,8 +33,6 @@ def drawing(type_of_action=[], colours=[], cursor_widths=[],  circle_radii=[], d
         elif type_of_action[each_move] == "turn":
             right(angle_of_turns[turn_num])
             turn_num += 1
-    # exiting gracefully
-    done()
 
 
 def front_end():
@@ -120,10 +118,9 @@ def single_line_feature_creation():
     # function for button
     def dedicate_the_movement():
         move_type_list.append(assign_type(move_type.get()))
-        line_input.destroy()
         find_where_to_append()
-        # drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
-        print(move_type_list, distance_of_moves_list, angle_of_turns_list, circle_radii_list)
+        line_input.destroy()
+        # print(move_type_list, distance_of_moves_list, angle_of_turns_list, circle_radii_list)
 
     #button to dedicate
     dedicate_values = Button(values, text="create movement", command=dedicate_the_movement)
@@ -152,15 +149,28 @@ def single_line_feature_creation():
 
     line_input.mainloop()
 
+
+
 def draw():
+    global move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list
     drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
-    move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list = []
+    # reset all values after drawing
+    # print("before:", move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
+    move_type_list = []
+    colours_list = []
+    cursor_widths_list = []
+    circle_radii_list = []
+    distance_of_moves_list = []
+    angle_of_turns_list = []
+    # print("after:", move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
+    # exiting gracefully
+    done()
        
        
 def find_where_to_append():
     cursor_widths_list.append(move_type_width.get())
     colours_list.append([red.get(), green.get(), blue.get()])
-    print(colours_list)
+    # print(colours_list)
     if move_type.get() == 1:
         distance_of_moves_list.append(move_type_value.get())
         return
