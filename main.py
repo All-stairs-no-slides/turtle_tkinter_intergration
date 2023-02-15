@@ -56,9 +56,44 @@ def front_end():
     # exiting gracefully
     screen.mainloop()
 
+
 def create_your_pattern():
     print("create your pattern")
+    # general variables
+    num_of_repitions_window = Toplevel()
+    repititions = IntVar()
+    # header
+    repititions_header = Label(num_of_repitions_window, text = "choose number of repititions", font= subtitle_font)
+    # repition selection
+    num_of_repitions_entry = Spinbox(num_of_repitions_window, font=spinbox_font, from_= 0, to=1000, textvariable=repititions)
 
+    # finalisation of repition entry, button
+    finalisation_button = Button(num_of_repitions_window, text="draw", command=lambda: draw_repeatedly(repititions.get()))
+
+    # place pieces in grid
+    repititions_header.grid(row=1, column=1)
+    num_of_repitions_entry.grid(row=2, column=1)
+    finalisation_button.grid(row=3, column=1)
+
+# drawing repeatedly function
+def draw_repeatedly(num_of_reps):
+    global move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list
+    # loop as many times as stated
+    while(num_of_reps != 0):
+        drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
+        num_of_reps -= 1
+
+    # reset all values after drawing
+    # print("before:", move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
+    move_type_list = []
+    colours_list = []
+    cursor_widths_list = []
+    circle_radii_list = []
+    distance_of_moves_list = []
+    angle_of_turns_list = []
+    # print("after:", move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
+    # exiting gracefully
+    done()
 
 def single_line_feature_creation():
     # create the features of each line
@@ -150,7 +185,6 @@ def single_line_feature_creation():
     line_input.mainloop()
 
 
-
 def draw():
     global move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list
     drawing(move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
@@ -165,7 +199,7 @@ def draw():
     # print("after:", move_type_list, colours_list, cursor_widths_list, circle_radii_list, distance_of_moves_list, angle_of_turns_list)
     # exiting gracefully
     done()
-       
+
        
 def find_where_to_append():
     cursor_widths_list.append(move_type_width.get())
